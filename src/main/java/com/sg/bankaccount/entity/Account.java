@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -26,7 +25,7 @@ public class Account {
 
     private String iban;
     private float balance;
-    private Date creationDate;
+    private LocalDate creationDate;
     private AccountStateEnum state;
 
     @ManyToOne
