@@ -1,14 +1,11 @@
 package com.sg.bankaccount.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sg.bankaccount.enumeration.OperationTypeEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "OPERATION")
@@ -16,6 +13,8 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+@Builder
 public class Operation {
 
     @Id
@@ -30,6 +29,7 @@ public class Operation {
 
     @ManyToOne
     @JoinColumn(name="idAccount")
+    @ToString.Exclude
     private Account account;
 
 }

@@ -1,10 +1,7 @@
 package com.sg.bankaccount.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,6 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Client  {
 
     @Id
@@ -29,6 +27,6 @@ public class Client  {
 
     private LocalDate birthdate;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
     List<Account> accounts ;
 }
