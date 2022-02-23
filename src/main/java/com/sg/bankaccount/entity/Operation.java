@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -22,8 +23,8 @@ public class Operation {
     @Column(name ="idOperation")
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateEffectue;
+
+    private LocalDate dateOperation;
     private float amount;
     private OperationTypeEnum type;
 
