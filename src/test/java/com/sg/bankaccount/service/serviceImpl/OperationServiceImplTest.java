@@ -3,8 +3,11 @@ package com.sg.bankaccount.service.serviceImpl;
 import com.sg.bankaccount.dto.OperationsDto;
 import com.sg.bankaccount.entity.Account;
 import com.sg.bankaccount.entity.Client;
+import com.sg.bankaccount.entity.Operation;
 import com.sg.bankaccount.enumeration.AccountStateEnum;
+import com.sg.bankaccount.enumeration.OperationTypeEnum;
 import com.sg.bankaccount.repository.AccountRepository;
+import com.sg.bankaccount.repository.OperationRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,16 +29,16 @@ class OperationServiceImplTest {
     OperationServiceImpl operationService;
 
     @Mock
-    AccountRepository accountRepository;
+    OperationRepository operationRepository;
 
 
     @Test
     void should_success_checkOperations() {
         //Given
-        Account account = createAccount();
+        List<Operation> operations = createOperations();
         //when
-        Mockito.when(accountRepository.findByIban(Mockito.anyString()))
-                .thenReturn(Optional.of(account));
+        Mockito.when(operationRepository.findByAccountIban(Mockito.anyString()))
+                .thenReturn(operations);
         OperationsDto result = operationService.checkOperations("751");
         //then
         assertNotNull(result);
@@ -45,6 +49,18 @@ class OperationServiceImplTest {
 
 
 
+    }
+    private List<Operation> createOperations(){
+        Operation operation = Operation.builder()
+                .dateOperation(LocalDate.now())
+                .amount(120)
+                .type(OperationTypeEnum.CREDIT)
+                .account(createAccount())
+                .build();
+        List<Operation> operations = new ArrayList<Operation>();
+        operations.add(operation);
+
+        return operations;
     }
     private Account createAccount(){
         return Account.builder()
