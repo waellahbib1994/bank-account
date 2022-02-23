@@ -5,15 +5,11 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@SuperBuilder
-@EqualsAndHashCode(callSuper = true)
 public class AccountDto extends ResponseDto{
 
     private  String firstname;
@@ -24,5 +20,16 @@ public class AccountDto extends ResponseDto{
     private LocalDate creationDate;
     private AccountStateEnum state;
 
-
+    @Builder
+    public AccountDto(boolean success, String message, LocalDateTime timestamp, String firstname, String lastname, LocalDate birthdate,
+                      String iban, float balance, LocalDate creationDate, AccountStateEnum state) {
+        super(success, message, timestamp);
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthdate = birthdate;
+        this.iban = iban;
+        this.balance = balance;
+        this.creationDate = creationDate;
+        this.state = state;
+    }
 }

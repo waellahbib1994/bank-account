@@ -1,10 +1,7 @@
 package com.sg.bankaccount.entity;
 
 import com.sg.bankaccount.enumeration.AccountStateEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,6 +13,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+@Builder
 public class Account {
 
     @Id
@@ -30,9 +29,10 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name = "idClient")
+    @ToString.Exclude
     private Client client;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER)
     private List<Operation> Operations;
 
 }

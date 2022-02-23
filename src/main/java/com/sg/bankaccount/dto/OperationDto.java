@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class OperationDto {
-    private LocalDate dateEffectue;
+    private LocalDate dateOperation;
     private float amount;
     private OperationTypeEnum type;
 }
